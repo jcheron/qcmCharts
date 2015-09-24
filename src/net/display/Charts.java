@@ -62,9 +62,9 @@ public class Charts extends KObjectDisplay {
 		if ("btnAdd".equals(zoneName)) {
 			result = "<a class='btn add' title='Ajouter un graphique'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Ajouter un graphique...</a>";
 		} else if ("ckPreview".equals(zoneName)) {
-			result = "<input type='checkbox' id='ckPreview' name='ckPreview'><label for='ckPreview'> Aperçu du graphique</label>";
+			result = "<input type='checkbox' id='ckPreview' name='ckPreview'><label for='ckPreview'>&nbsp;Aperçu du graphique</label>";
 		} else if ("btAll".equals(zoneName)) {
-			result = "<a class='btn all' id='btAll' title='Afficher le rapport'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Afficher le rapport</a>";
+			result = "<a class='btn all' id='btAll' title='Afficher le rapport'><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> Afficher le rapport</a>";
 		}
 		return result;
 	}

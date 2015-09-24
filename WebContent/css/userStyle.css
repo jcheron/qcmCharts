@@ -126,3 +126,34 @@ div.infobulle p{
 .tdRight{
 	text-align: right;
 }
+.barCk{
+	margin: 2px 12px 2px;
+	display: inline-block;
+}
+@media print {
+   .boxButtons {
+       display: none;
+    }
+    .content{
+      background-color: white !important;
+        height: 100% !important;
+        width: 100% !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 !important;
+        padding: 15px !important;
+        border: none !important;
+    }
+}
+#page-wrap { 
+  width: 600px; 
+  margin: 15px auto; 
+  position: relative; 
+}
+
+#sidebar { 
+  width: 190px; 
+  position: fixed; 
+  margin-left: 410px; 
+}

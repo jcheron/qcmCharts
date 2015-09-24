@@ -2135,8 +2135,6 @@ var Forms = {};//nameSpace
 						return;
 					}
 				}
-				//if(event.indexOf("key", 0)==0 && element==document)
-				//	Forms.documentKeyEvents
 				if(element!=null){
 					if(typeof(func)=='string')
 						func=eval(func);
@@ -2734,6 +2732,12 @@ var Forms = {};//nameSpace
 				}
 				else
 					if (event.stopPropagation) event.stopPropagation();
+			},
+			preventDefault:function(event) {
+				 var evt = event ? event:window.event;
+				 if (evt.preventDefault) evt.preventDefault();
+				 evt.returnValue = false;
+				 return false;
 			},
 			unescapeHTML: function(html) {
 			    return html.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&apos;/g,"'").replace(/&eacute;/g,"é").replace(/&quot;/g,'"').replace(/&frasl;/g,"/");
@@ -4285,7 +4289,7 @@ getCheckedValues=function(checkedObj) {
 				if (window.event) keycode = window.event.keyCode;
 					else if (e) keycode = e.which;
 				if(e.shiftKey){
-					e.preventDefault;
+					//e.preventDefault;
 					var btn=null;
 					switch (keycode) {
 					case 33://pageUp
@@ -4310,7 +4314,8 @@ getCheckedValues=function(checkedObj) {
 					if(btn)
 						Forms.Utils.fireEvent($(btn), "click");
 					void(0);
-					return false;
+					Forms.Utils.stopPropagation(e);
+					return Forms.Utils.preventDefault(e);
 				}
 			};
 			Forms.Utils.addUniqueEvent(document, "keydown", keyUpFunction, true,undefined,true);
@@ -4741,19 +4746,26 @@ Forms.Framework.DeboggerObject.created=false;
 				}
 				return this;
 			},
+			addUniqueEvent:function(event,func,before,keyCode){
+				values=this.values;
+				for(var i=0;i<values.length;i++){
+					Forms.Utils.addUniqueEvent(values[i], event, func, before, keyCode);
+				}
+				return this;
+			},
 			attr:function(attr,newValue){
 				values=this.values;
 				for(var i=0;i<values.length;i++){
 					values[i][attr]=newValue;
 				}
-				return this;				
+				return this;
 			},
 			html:function(html){
 				values=this.values;
 				for(var i=0;i<values.length;i++){
 					Forms.Utils.setInnerHTML(values[i], html);
 				}
-				return this;				
+				return this;
 			},
 			css:function(styles){
 				values=this.values;

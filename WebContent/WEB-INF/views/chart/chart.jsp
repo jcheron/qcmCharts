@@ -47,7 +47,8 @@ if(KRequest.isPost(request)){
 			description=kchart.getDescription();
 			divId="chart-"+all;
 			if(all==0){
-				out.print("<div class='boxButtons'><a class='btn all' id='btCloseAll' title='Fermer le rapport'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Fermer le rapport</a></div>");
+				out.print("<div class='boxButtons'><a class='btn all' id='btCloseAll' title='Fermer le rapport'><span class='glyphicon glyphicon-off' aria-hidden='true'></span> Fermer le rapport</a>");
+				out.print("<a class='btn all' id='btPrintAll' title='Imprimer le rapport'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> Imprimer</a></div>");
 				out.print("<input type='hidden' id='chartValue' name='chartValue' value='0'>");
 			}
 			cont=true;

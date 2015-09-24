@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <mainController xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.kobject.net/xml/mapping-1.0.0.25d.xsd">
 	<mappings>
-        <mapping method="GET" requestURL="ask.do" responseURL="/WEB-INF/views/ask.show"/>
-        <mapping method="POST" requestURL="test.do" responseURL="/WEB-INF/views/test.jsp"/>
+        <mapping requestURL="ask.do" responseURL="/WEB-INF/views/ask.show" method="GET"/>
+        <mapping requestURL="test.do" responseURL="/WEB-INF/views/test.jsp" method="POST" />
         <mapping requestURL="q.do" responseURL="/WEB-INF/views/questionnaire.view"/>
         <mapping requestURL="q2.do" responseURL="/WEB-INF/views/questionnaire.view"/>
         <mapping requestURL="mkchart.do" responseURL="/WEB-INF/views/chart/chart.view"/>
@@ -12,10 +12,10 @@
         <mapping method="POST" requestURL="chartOptions.do" responseURL="/WEB-INF/views/chart/chartOptions.jsp"/>
         <mapping method="POST" requestURL="options.do" responseURL="/WEB-INF/views/chart/options.jsp"/>
         <mapping requestURL="questions.do" responseURL="/WEB-INF/views/question.list"/>
-        <mapping method="POST" requestURL="validate.do" responseURL="Validation"/>
+        <mapping requestURL="validate.do" responseURL="Validation" method="POST"/>
         <mapping requestURL="end.do" responseURL="/WEB-INF/views/end.jsp"/>
-        <virtualMapping mainControl="false" mappingFor="submitForm" requestURL="updateChart.do"/>
-        <virtualMapping mappingFor="deleteOne" requestURL="deleteChart.do"/>
+        <virtualMapping requestURL="updateChart.do" mainControl="false" mappingFor="submitForm" />
+        <virtualMapping requestURL="deleteChart.do" mappingFor="deleteOne" />
         <mapping requestURL="chartsRefresh.do" responseURL="/WEB-INF/views/chart/chart.list" queryString="_refresh=true"/>
     </mappings>
 	<filters>
@@ -119,22 +119,55 @@
         </request>
         <request requestURL="mkChart.do">
             <js triggerEvent="change" triggerSelector="#viewName, #options">
-                <include condition="$$('type')" formName="frmKChart" method="POST" targetFunction="function(){drawChart();}" targetId="divChart" targetURL="chart.do" transition="inflate"/>
+                <include condition="$$('type')" formName="frmKChart" method="POST" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}" targetId="divChart" targetURL="chart.do" transition="inflate"/>
+            </js>
+            <js triggerSelector="input, textarea" triggerEvent="change" triggerContext="$('frmKChart')">
+            	<function script="document.updated=true;(new $e('#fsFrmKChart legend').html('Graphique*'));"/>
+            </js>
+            <js triggerEvent="load" triggerSelector="body">
+                <include condition="$$('type')" formName="frmKChart" method="POST" targetId="divOpt" targetURL="chartOptions.do"/>
+                <function script="document.updated=false;"/>
             </js>
             <js triggerEvent="change" triggerSelector="#type">
-                <include formName="frmKChart" method="POST" targetId="divOpt" targetURL="chartOptions.do"/>
+                <include condition="$$('type')" formName="frmKChart" method="POST" targetId="divOpt" targetURL="chartOptions.do"/>
             </js>
             <js triggerEvent="click" triggerSelector="#btClose">
-                <showHide targetSelector="#chartDetails" visible="0"/>
-                <showHide targetSelector="#chartList" visible="1"/>
+                <messageDialog modal="false" title="Fermeture du graphique" transition="inflate" condition="document.updated">
+                    <button caption="Enregistrer et Fermer" id="btCloseAndSave">
+		                <submitForm condition="vfrmKChart.validate()==true" formName="frmKChart" kobjectShortClassName="KChart" method="POST" targetId="_ajx" validation="true" virtualURL="updateChart.do">
+		                	<include targetURL="chartsRefresh.do" targetId="_ajxContent">
+		                		<showHide targetSelector="#chartDetails" visible="0"/>
+		                		<showHide targetSelector="#chartList" visible="1"/>
+		                		<function script="document.updated=false;"/>
+		                	</include>
+		                </submitForm>
+                        <function script="return true;"/>
+                    </button>
+                    <button caption="Fermer" id="btCloseNotSave">
+                		<showHide targetSelector="#chartDetails" visible="0"/>
+                		<showHide targetSelector="#chartList" visible="1"/>
+		                <function script="document.updated=false;"/>
+                        <function script="return true;"/>
+                    </button>
+                    <button caption="Annuler" id="btCancel">
+                        <function script="return true;"/>
+                    </button>
+                    <message><![CDATA['<p>Souhaitez-vous enregistrer vos modifications<br> avant de poursuivre ?</p>']]></message>
+                </messageDialog>
+                <showHide targetSelector="#chartDetails" visible="0" condition="!document.updated"/>
+		        <showHide targetSelector="#chartList" visible="1" condition="!document.updated"/>
             </js>
             <js triggerEvent="click" triggerSelector="#btSave">
                 <submitForm condition="vfrmKChart.validate()==true" formName="frmKChart" kobjectShortClassName="KChart" method="POST" targetId="_ajx" validation="true" virtualURL="updateChart.do">
                 	<include targetURL="chartsRefresh.do" targetId="_ajxContent">
                 		<showHide targetSelector="#chartDetails" visible="0"/>
                 		<showHide targetSelector="#chartList" visible="1"/>
+                		<function script="document.updated=false;"/>
                 	</include>
                 </submitForm>
+            </js>
+            <js triggerSelector="#btRefresh" triggerEvent="click">
+                <include condition="$$('type')" formName="frmKChart" method="POST" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}" targetId="divChart" targetURL="chart.do" transition="inflate"/>
             </js>
         </request>
         <request requestURL="validate.do">
@@ -209,6 +242,14 @@
 				<showHide targetSelector="#chartList" visible="1"/>
 				<showHide targetSelector="#chartDetails" visible="0"/>
 			</js>
+			<js triggerSelector="#btPrintAll" triggerEvent="click" unique="true">
+				<function script="window.print();"/>
+			</js>
+        </request>
+        <request requestURL="chartsRefresh.do">
+        	<js triggerSelector=".close" triggerEvent="click">
+        		<showHide targetSelector=".alert" visible="0"/>
+        	</js>
         </request>
     </ajax-includes>
 </mainController>

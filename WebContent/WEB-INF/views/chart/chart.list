@@ -12,7 +12,7 @@
 		{_listContent}
 			{_filtre}
 			{_page}
-		<div class="boxButtons">{_pageCounter}{_navBarre}{ckPreview}{btAll}{btnAdd}</div>
+		<div class="boxButtons">{_pageCounter}{_navBarre}<div class="barCk">{ckPreview}</div>{btAll}{btnAdd}</div>
 		{/_listContent}
 		</div>
 		<div id="chartDetails"></div>
