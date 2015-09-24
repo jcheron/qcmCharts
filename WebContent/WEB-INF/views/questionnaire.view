@@ -1,0 +1,15 @@
+<div class="panel">
+<div class="panel-body" id="content">
+{_form}
+{nom}{prenom}{email}{dNaiss}
+<div id="progressBar">
+	<div class="progress">
+	  <div id="pb" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+	    <span class="sr-only">0%</span>
+	  </div>
+	</div>
+</div>
+<div id="divQuestions"></div>
+{/_form}
+</div>
+</div>

@@ -1,0 +1,12 @@
+{#koDisplay:net.display.Reponses#}
+{#className:net.models.KQuestion#}
+<form id="frmTest">
+{_fieldset}
+{id}
+{libelle}
+{reponses}
+{/_fieldset}
+</form>
+<button class="btn" id="btNext">Suivant</button>
+<div id="zone"></div>
+{#set:this.ajaxIncludes=true#}

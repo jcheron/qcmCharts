@@ -1,0 +1,9 @@
+{#func:this.setEditable(false)#}
+{#koDisplay:net.display.Questions#}
+{#mask:<td class="libelleQuestion">{libelle} ? {infoBulle}</td><td>{essai}</td>#}
+<div class="boxButtons">{btnPrevious}{btnNext}</div>
+{_listContent}
+	{_page}
+{/_listContent}
+<div class="boxButtons">{btnPrevious-down}{btnNext-down}</div>
+{#set:this.ajaxIncludes=true#}

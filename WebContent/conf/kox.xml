@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<controllers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.kobject.net/xml/controller-1.0.0.25b.xsd">
+<class name="KCategorie">
+        <member max="100" name="Libelle" required="1" type="string"/>
+    </class>
+    <class name="KQuestion">
+        <member max="11" name="idCategorie" required="1" type="int"/>
+        <member max="100" name="libelle" required="1" type="string"/>
+        <member max="100" name="libc" required="1" type="string"/>
+        <member max="11" name="ordre" required="1" type="int"/>
+        <member max="30" name="type" required="1" type="string" list="{Ouverte:Ouverte,Multiple:Multiple,MultipleUnique:Multiple unique,MultipleExt:Multiple avec Ext,MultipleUniqueExt:Multiple unique avec Ext}"/>
+        <member name="complement" type="string" control="textarea"/>
+    </class>
+    <class name="KChart" display="net.display.Charts" caption="Graphique">
+    	<member name="type" caption="Type" type="string" control="radiodatalist" list="{PieChart:Secteurs,ColumnChart:Colonnes,Histogram:Histogramme,BubbleChart:Bulles,ScatterChart:ScatterChart,SteppedAreaChart:SteppedAreaChart,AreaChart:AreaChart,Table:Tableau}"/>
+    	<member name="viewName" control="radiodatalist" caption="Vue associée" required="true"/>
+    	<member name="options" type="string" control="textarea" caption="Options du graphique"/>
+    	<member name="description" type="string" control="textarea" caption="Description"/>
+    </class>
+    <class name="KChartOption">
+    	<member name="name" caption="Name" type="string"/>
+    	<member name="type" caption="Type" type="string" control="list" list="{boolean:boolean,text:text,int:int,float:float,list:list,object:object}"/>
+    	<member name="chartType" type="string" caption="ChartType" control="checkedlist" list="{PieChart:Secteurs,ColumnChart:Colonnes,Histogram:Histogramme,BubbleChart:Bulles,ScatterChart:ScatterChart,SteppedAreaChart:SteppedAreaChart,AreaChart:AreaChart,Table:Tableau}"/>
+    	<member name="values" caption="Values" type="string"/>
+    	<member name="defaultValue" caption="DefaultValues" type="string"/>
+    </class>
+    <class name="KQuestionnaire" caption="Questionnaire de rentrée">
+        <member max="10" name="dNaiss" required="1" type="date" caption="Date de naissance"/>
+        <member max="255" name="email" required="1" type="mail" caption="Adresse email"/>
+        <member max="30" name="nom" required="1" type="string" caption="Nom"/>
+        <member max="30" name="prenom" required="1" type="string" caption="Prénom"/>
+    </class>
+    <class name="KReponse">
+        <member max="11" name="idQuestion" required="1" type="int"/>
+        <member max="100" name="libelle" required="1" type="string"/>
+        <member max="11" name="ordre" required="1" type="int"/>
+    </class>
+    <class name="KReponsemultiple">
+        <member max="11" name="idQuestionnaire" required="1" type="int"/>
+        <member max="11" name="idReponse" required="1" type="int"/>
+    </class>
+    <class name="KReponseunique">
+        <member max="11" name="idQuestion" required="1" type="int"/>
+        <member max="11" name="idQuestionnaire" required="1" type="int"/>
+        <member max="100" name="reponse" required="1" type="string"/>
+    </class>
+</controllers>

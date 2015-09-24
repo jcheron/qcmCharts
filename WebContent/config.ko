@@ -1,0 +1,35 @@
+#Fichier de configuration KoCreator version 1.0.0.25f
+#Sun Sep 20 14:31:30 CEST 2015
+actionsName=action.do
+base=questionnaire
+cacheType=1
+classes=
+clientDebug=false
+clientDebugOptions=true
+constraintsDepth=1
+controlClass=
+cssFile=css/css.properties
+dbOptions=
+dbType=mysql
+debug=true
+erFile=conf/validation/er.properties
+footerURL=/WEB-INF/footer.jsp
+headerURL=/WEB-INF/header.jsp
+host=127.0.0.1
+koDateFormat=dd/MM/yyyy
+logFormat=html
+mappingFile=conf/mox.xml
+messagesFile=conf/validation/messages.properties
+nullValue=&nbsp;
+package=net.models
+password=
+pluginVersion=1.0.0.25f
+port=3306
+schema.ddl=validate
+sqlDateFormat=yyyy-MM-dd
+useCache=false
+useLog=true
+useSetters=false
+user=root
+validationFile=conf/kox.xml
+webApp=true
