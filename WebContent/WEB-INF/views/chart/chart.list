@@ -4,7 +4,7 @@
 {#func:this.addSelector(113)#}
 {#set:this.filtreCaption=Graphiques#}
 {#include:../../header.jsp#}
-{#mask:<td>{viewName}</td><td>{type}</td><td class="tdRight">{update}{delete}</td>#}
+{#mask:<td>{viewName}</td><td>{type}</td><td class="tdRight">{move}{update}{delete}</td>#}
 <div class="panel">
 	<div class="panel-body" id="content">
 		<div id="chartList">

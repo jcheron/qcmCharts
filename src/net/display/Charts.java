@@ -12,6 +12,7 @@ import net.ko.framework.Ko;
 import net.ko.http.views.KFieldControl;
 import net.ko.http.views.KHtmlFieldControl;
 import net.ko.http.views.KPageList;
+import net.ko.kobject.KListObject;
 import net.ko.kobject.KObject;
 import net.ko.utils.KStrings;
 import net.models.KChart;
@@ -52,6 +53,9 @@ public class Charts extends KObjectDisplay {
 			result = "<a class='btn update' id='update-" + ko.getId() + "' title='Modifier le graphique'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> </a>";
 		} else if ("delete".equals(memberName)) {
 			result = "<a class='btn delete' id='delete-" + ko.getId() + "' title='Supprimer le graphique'><span onclick='return false;' class='glyphicon glyphicon-remove' aria-hidden='true'></span> </a>";
+		} else if ("move".equals(memberName)) {
+			result = "<div class='move' style='display:none' id='move-" + ko.getId() + "'><a class='btn up' id='up-" + ko.getId() + "' title='Remonter le graphique dans la liste'><span onclick='return false;' class='glyphicon glyphicon-arrow-up' aria-hidden='true'></span> </a>";
+			result += "<a class='btn down' id='down-" + ko.getId() + "' title='descendre le graphique dans la liste'><span onclick='return false;' class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span> </a></div>";
 		}
 		return result;
 	}
@@ -72,9 +76,14 @@ public class Charts extends KObjectDisplay {
 	@Override
 	public String getCaption(KObject ko, String memberName) {
 		String result = super.getCaption(ko, memberName);
-		if ("update".equals(memberName) || "delete".equals(memberName))
+		if ("update".equals(memberName) || "delete".equals(memberName) || "move".equals(memberName))
 			result = "";
 		return result;
 	}
 
+	@Override
+	public void afterLoading(KListObject<? extends KObject> kl, KPageList list, HttpServletRequest request) {
+		super.afterLoading(kl, list, request);
+		kl.sortBy("ordre");
+	}
 }

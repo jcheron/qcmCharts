@@ -1,3 +1,6 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="net.ko.utils.KString"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="net.ko.framework.KoHttp"%>
 <%@page import="net.ko.types.HtmlControlType"%>
@@ -13,7 +16,7 @@ Map<String,Object> values=new HashMap<String,Object>();
 Enumeration<String> names=request.getParameterNames();
 while(names.hasMoreElements()){
 	String name=names.nextElement();
-	if(!name.startsWith("_ajx") && !name.startsWith("request.id") && !"".equals(request.getParameter(name))){
+	if(!name.startsWith("_") && !name.startsWith("request.id") && !"".equals(request.getParameter(name))){
 		String parameter=request.getParameter(name);
 		if(parameter.startsWith("[")){
 			JSONArray oParameter;
@@ -31,8 +34,15 @@ while(names.hasMoreElements()){
 			}catch(Exception e){
 				values.put(name,parameter);
 			}
-		}else
-			values.put(name,parameter);
+		}else{
+			if(KString.isBoolean(parameter))
+				values.put(name,KString.isBooleanTrue(parameter));
+			else if(KString.isNumeric(parameter)){
+				Number n=NumberFormat.getNumberInstance(Locale.FRENCH).parse(parameter);
+				values.put(name,n);
+			}else
+				values.put(name, parameter);
+		}
 	}
 }
 JSONObject options=new JSONObject(values);

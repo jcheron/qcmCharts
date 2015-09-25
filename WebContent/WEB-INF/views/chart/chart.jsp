@@ -38,6 +38,7 @@ if(KRequest.isPost(request)){
 	}else if(request.getParameter("all")!=null){
 		KChart kchart=new KChart();
 		KParameterizedInstruction sql=new KParameterizedInstruction("`","");
+		sql.setOrderBy("ordre");
 		all=Integer.valueOf(request.getParameter("all"));
 		Ko.getDao(KChart.class).read(kchart, sql, all);
 		if(kchart.isLoaded()){
@@ -82,7 +83,7 @@ if(!"".equals(viewName) && viewName!=null){
 	camembert.setStrOptions(options);
 	out.print("<script>"+camembert+"</script>");
 	%>
-	<div id="<%=divId%>" style="width: 900px; height: 500px;"></div>
+	<div id="<%=divId%>" class="chartContainer"></div>
 	<%
 	if(!"".equals(description) && description!=null){
 		out.print("<div class='descriptionChart'>"+description+"</div>");

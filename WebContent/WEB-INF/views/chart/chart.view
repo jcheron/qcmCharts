@@ -3,7 +3,7 @@
 <div id="divDefChart">
 {_form}
 {_fieldset}
-{type}{viewName}<div id="optionsAjax">{options}</div>{description}
+{type}{viewName}{ordre}<div id="optionsAjax">{options}</div>{description}
 {/_fieldset}
 {/_form}
 <div class="boxButtons">

@@ -14,6 +14,7 @@
         <mapping requestURL="questions.do" responseURL="/WEB-INF/views/question.list"/>
         <mapping requestURL="validate.do" responseURL="Validation" method="POST"/>
         <mapping requestURL="end.do" responseURL="/WEB-INF/views/end.jsp"/>
+        <mapping requestURL="order.do" responseURL="/Order" method="GET"/>
         <virtualMapping requestURL="updateChart.do" mainControl="false" mappingFor="submitForm" />
         <virtualMapping requestURL="deleteChart.do" mappingFor="deleteOne" />
         <mapping requestURL="chartsRefresh.do" responseURL="/WEB-INF/views/chart/chart.list" queryString="_refresh=true"/>
@@ -133,7 +134,7 @@
             </js>
             <js triggerEvent="click" triggerSelector="#btClose">
                 <messageDialog modal="false" title="Fermeture du graphique" transition="inflate" condition="document.updated">
-                    <button caption="Enregistrer et Fermer" id="btCloseAndSave">
+                    <button caption="Enregistrer et Fermer" id="btCloseAndSave"  glyphIcon="floppy-save">
 		                <submitForm condition="vfrmKChart.validate()==true" formName="frmKChart" kobjectShortClassName="KChart" method="POST" targetId="_ajx" validation="true" virtualURL="updateChart.do">
 		                	<include targetURL="chartsRefresh.do" targetId="_ajxContent">
 		                		<showHide targetSelector="#chartDetails" visible="0"/>
@@ -143,13 +144,13 @@
 		                </submitForm>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Fermer" id="btCloseNotSave">
+                    <button caption="Fermer" id="btCloseNotSave" glyphIcon="off">
                 		<showHide targetSelector="#chartDetails" visible="0"/>
                 		<showHide targetSelector="#chartList" visible="1"/>
 		                <function script="document.updated=false;"/>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Annuler" id="btCancel">
+                    <button caption="Annuler" id="btCancel" glyphIcon="remove-sign">
                         <function script="return true;"/>
                     </button>
                     <message><![CDATA['<p>Souhaitez-vous enregistrer vos modifications<br> avant de poursuivre ?</p>']]></message>
@@ -200,13 +201,13 @@
             </js>
             <js triggerEvent="click" triggerSelector=".delete">
                 <messageDialog modal="false" title="Suppression du graphique" transition="inflate">
-                    <button caption="Supprimer" id="btDelete">
+                    <button caption="Supprimer" id="btDelete" glyphIcon="ok-sign">
                         <deleteOne kobjectShortClassName="KChart" targetId="_ajx" virtualURL="deleteChart.do" keyValues="{js:$vId(target.id)}">
                          	<include targetURL="chartsRefresh.do" targetId="_ajxContent"/>
                          </deleteOne>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Annuler" id="btCancel">
+                    <button caption="Annuler" id="btCancel" glyphIcon="remove-sign">
                         <function script="return true;"/>
                     </button>
                     <message><![CDATA['<p>Le graphique sera définitivement supprimé.<br>Souhaîtez vous poursuivre ?</p>']]></message>
@@ -222,6 +223,10 @@
             	<include targetURL="chart.do" targetId="chartDetails" condition="$('ckPreview').checked" targetParams="id={js:e.detail.value}" method="GET" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}" transition="opacityShow">
             		<showHide targetSelector="#chartDetails" visible="1"/>
             	</include>
+            	<showHide targetSelector="#move-{js:e.detail.value}" visible="e.detail.value" condition="!(!e.detail || !e.detail.value)"/>
+            </js>
+            <js triggerSelector="#list-KChart" triggerEvent="beforeitemchange">
+            	<showHide targetSelector="#move-{js:e.detail.value}" visible="0" condition="!(!e.detail || !e.detail.value)"/>
             </js>
             <js triggerSelector="#ckPreview" triggerEvent="click">
             	<include targetURL="chart.do" targetId="chartDetails" condition="!(!$('ckPreview').checked || $$('h-KChart')=='')" targetParams="id={jsv:'h-KChart'}" method="GET" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}" transition="opacityShow"/>
@@ -231,6 +236,16 @@
 				<showHide targetSelector="#chartList" visible="0"/>
 				<showHide targetSelector="#chartDetails" visible="1"/>
             	<include targetURL="allCharts.do" targetParams="all=0" targetId="chartDetails" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}"/>
+            </js>
+            <js triggerSelector=".up" triggerEvent="click">
+            	<include targetURL="order.do" targetParams="sens=up">
+                	<include targetURL="chartsRefresh.do" targetId="_ajxContent" targetParams="selectedItem={js:$vId(target.id)}"/>
+            	</include>
+            </js>
+            <js triggerSelector=".down" triggerEvent="click">
+            	<include targetURL="order.do" targetParams="sens=down">
+                	<include targetURL="chartsRefresh.do" targetId="_ajxContent" targetParams="selectedItem={js:$vId(target.id)}"/>
+            	</include>
             </js>
         </request>
         <request requestURL="allCharts.do">

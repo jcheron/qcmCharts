@@ -157,3 +157,19 @@ div.infobulle p{
   position: fixed; 
   margin-left: 410px; 
 }
+.google-visualization-table-table{
+	font-family: inherit !important;
+}
+.google-visualization-table, .chartContainer>div{
+	display: block !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	margin-top: 20px !important;
+}
+.chartContainer{
+	width: 100%;
+	height: 500px;
+}
+.move{
+	display: inline-block;
+}

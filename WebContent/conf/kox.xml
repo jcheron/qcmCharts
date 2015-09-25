@@ -16,6 +16,7 @@
     	<member name="viewName" control="radiodatalist" caption="Vue associée" required="true"/>
     	<member name="options" type="string" control="textarea" caption="Options du graphique"/>
     	<member name="description" type="string" control="textarea" caption="Description"/>
+    	<member name="ordre" type="integer" control="number" caption="Ordre"/>
     </class>
     <class name="KChartOption">
     	<member name="name" caption="Name" type="string"/>

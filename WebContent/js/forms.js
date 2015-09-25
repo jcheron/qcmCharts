@@ -197,7 +197,7 @@ var Forms = {};//nameSpace
 			}
 			if(typeof(buttons)=='object')
 			for(var bt in buttons){
-				this.addAction(undefined,buttons[bt].caption,buttons[bt].action,buttons[bt].keyCode);
+				this.addAction(undefined,buttons[bt].caption,buttons[bt].action,buttons[bt].keyCode,buttons[bt].glyphIcon);
 			}
 		},
 		addButton:function(caption,keycode){
@@ -269,26 +269,36 @@ var Forms = {};//nameSpace
 				Forms.Utils.addEventToElement(divClose, "click", function(){self.tryToClose();self.hide();}, false);
 			}
 		},
-		innerAddButton: function(id,caption,keycode){
+		innerAddButton: function(id,caption,keycode,glyphIcon){
 			var myId=caption.replace(/\W/g,"_");
 			if(!id)
 				id=this.id+'-'+myId+'-boxBtn';
 			var btn=$(id);
 			if(btn==null){
-				btn=document.createElement("input");
+				btn=document.createElement("a");
 				btn.id=id;
-				btn.type="button";
+				//btn.type="button";
+				//this.setButtonContent(caption,glyphIcon);
 				$(this.id+"-boxButtons").appendChild(btn);
 			}
 			var me=this;
 			var myfunction=function(){
 				me.submit(caption);
 			};
-			btn.value=caption;
+			if(glyphIcon!=undefined)
+				this.setButtonContent(btn, caption, glyphIcon);
+			else
+				this.setButtonContent(btn, caption);
 			btn.className="btn";
 			btn.onclick=myfunction;
 			if(keycode!=undefined)
 				keyCodes[eval(keycode)]=myfunction;	
+		},
+		setButtonContent: function(btn,caption,glyphIcon){
+			var content=caption;
+			if(glyphIcon)
+				content="<span class='glyphicon glyphicon-"+glyphIcon+"' aria-hidden='true'></span>&nbsp;"+content;
+			Forms.Utils.setInnerHTML(btn, content);
 		},
 		addActions:function(actions){
 			if(typeof(actions)=='string'){
@@ -298,11 +308,11 @@ var Forms = {};//nameSpace
 			}
 			if(typeof(actions)=='object')
 			for(var a in actions){
-				this.addAction(actions[a].id,actions[a].caption,actions[a].action,actions[a].keycode);
+				this.addAction(actions[a].id,actions[a].caption,actions[a].action,actions[a].keycode,actions[a].glyphIcon);
 			}
 		},
-		addAction:function(id,caption,action,keyCode){
-			this.innerAddButton(id,caption,keyCode);
+		addAction:function(id,caption,action,keyCode,glyphIcon){
+			this.innerAddButton(id,caption,keyCode,glyphIcon);
 			this.waitFor(caption,action);
 		},
 		deleteAction:function(action){
@@ -317,10 +327,14 @@ var Forms = {};//nameSpace
 				this.deleteAction(this.results[actKey]);
 			this.results=new Array();
 		},
-		setBtnCaption:function(btn,newCaption){
+		setBtnCaption:function(btn,newCaption,glyphIcon){
 			var element=$(this.id+"."+btn+"-boxBtn");
-			if(element!=null)
-				element.value=newCaption;
+			if(element!=null){
+				if(glyphIccon)
+					this.setButtonContent(element, newCaption, glyphIcon);
+				else
+					this.setButtonContent(element, newCaption);
+			}
 		},
 		onkeydown:function(e){
 			var keycode=null;
@@ -1163,8 +1177,10 @@ var Forms = {};//nameSpace
 					if(cont){
 						Forms.Utils.setStyles(element,this.selectedStyle);
 						selected=this.getSelected();
-						if(selected!=-1&&(selected!==element.id||this.allowNull))
+						if(selected!=-1&&(selected!==element.id||this.allowNull)){
+							Forms.Utils.dispatchCustomEvent(this.parent.id, "beforeitemchange", {"item":$(selected),"value":$$("id-"+selected)});
 							this.clearStyles($(selected));
+						}
 						if(selected===element.id&&this.allowNull)
 							this.setSelected(undefined);
 						else
@@ -1985,7 +2001,7 @@ var Forms = {};//nameSpace
 						obj=$(id);
 				}
 				if(obj!=undefined){
-					if (method==true){
+					if (method){
 						if(obj.oldDisplay)
 							obj.style.display=obj.oldDisplay;
 						else
@@ -3291,9 +3307,9 @@ var Forms = {};//nameSpace
 				if(this.ajxLightBox!=null)
 					this.ajxLightBox.deleteAction(action);
 			},
-			setBtnCaption:function(btn,newCaption){
+			setBtnCaption:function(btn,newCaption,glyphIcon){
 				if(this.ajxLightBox!=null)
-					this.ajxLightBox.setBtnCaption(btn,newCaption);
+					this.ajxLightBox.setBtnCaption(btn,newCaption,glyphIcon);
 			}
 	};
 })();

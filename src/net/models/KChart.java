@@ -12,6 +12,7 @@ public class KChart extends KObject {
 	private String type;
 	private String options = "";
 	private String description = "";
+	private int ordre;
 
 	public String getViewName() {
 		return viewName;
@@ -48,5 +49,13 @@ public class KChart extends KObject {
 	@Override
 	public String toString() {
 		return viewName + " (" + type + ")";
+	}
+
+	public int getOrdre() {
+		return ordre;
+	}
+
+	public void setOrdre(int ordre) {
+		this.ordre = ordre;
 	}
 }
