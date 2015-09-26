@@ -12,16 +12,20 @@
         <member name="complement" type="string" control="textarea"/>
     </class>
     <class name="KChart" display="net.display.Charts" caption="Graphique">
-    	<member name="type" caption="Type" type="string" control="radiodatalist" list="{PieChart:Secteurs,ColumnChart:Colonnes,Histogram:Histogramme,BubbleChart:Bulles,ScatterChart:ScatterChart,SteppedAreaChart:SteppedAreaChart,AreaChart:AreaChart,Table:Tableau}"/>
+    	<member name="type" caption="Type" type="string" control="radiodatalist" list="[net.models.KCharttype]"/>
     	<member name="viewName" control="radiodatalist" caption="Vue associée" required="true"/>
     	<member name="options" type="string" control="textarea" caption="Options du graphique"/>
     	<member name="description" type="string" control="textarea" caption="Description"/>
     	<member name="ordre" type="integer" control="number" caption="Ordre"/>
     </class>
+    <class name="KCharttype" caption="Type de graphique">
+    	<member name="name" caption="Code" type="string" required="true"/>
+    	<member name="title" caption="Nom" type="string"/>
+    </class>
     <class name="KChartOption">
     	<member name="name" caption="Name" type="string"/>
     	<member name="type" caption="Type" type="string" control="list" list="{boolean:boolean,text:text,int:int,float:float,list:list,object:object}"/>
-    	<member name="chartType" type="string" caption="ChartType" control="checkedlist" list="{PieChart:Secteurs,ColumnChart:Colonnes,Histogram:Histogramme,BubbleChart:Bulles,ScatterChart:ScatterChart,SteppedAreaChart:SteppedAreaChart,AreaChart:AreaChart,Table:Tableau}"/>
+    	<member name="chartType" type="string" caption="ChartType" control="checkedlist" list="[net.models.KCharttype]"/>
     	<member name="values" caption="Values" type="string"/>
     	<member name="defaultValue" caption="DefaultValues" type="string"/>
     </class>
