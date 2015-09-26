@@ -12,7 +12,7 @@
         <member name="complement" type="string" control="textarea"/>
     </class>
     <class name="KChart" display="net.display.Charts" caption="Graphique">
-    	<member name="type" caption="Type" type="string" control="radiodatalist" list="[net.models.KCharttype]"/>
+    	<member name="type" caption="Type" type="string" control="radiodatalist" list="[net.models.KCharttype]" required="true"/>
     	<member name="viewName" control="radiodatalist" caption="Vue associée" required="true"/>
     	<member name="options" type="string" control="textarea" caption="Options du graphique"/>
     	<member name="description" type="string" control="textarea" caption="Description"/>

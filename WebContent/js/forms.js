@@ -277,8 +277,6 @@ var Forms = {};//nameSpace
 			if(btn==null){
 				btn=document.createElement("a");
 				btn.id=id;
-				//btn.type="button";
-				//this.setButtonContent(caption,glyphIcon);
 				$(this.id+"-boxButtons").appendChild(btn);
 			}
 			var me=this;
@@ -1107,8 +1105,9 @@ var Forms = {};//nameSpace
 				if(objects.length>0){
 					this.parent=Forms.Utils.getParent(objects[0],this.parentTagName);
 					this.parent.selector=this;
+					this.parent.tabIndex="1";
 				}
-				Forms.Utils.addUniqueEvent(document, this.event, keyUpFunction, true,undefined,true);
+				Forms.Utils.addUniqueEvent(this.parent, this.event, keyUpFunction, true,undefined,true);
 			}else{
 				for ( var i = this.startIndex; i < objects.length; i++ ) {
 					objects[i].selectorIndex=i;
@@ -4329,9 +4328,9 @@ getCheckedValues=function(checkedObj) {
 					}
 					if(btn)
 						Forms.Utils.fireEvent($(btn), "click");
-					void(0);
-					Forms.Utils.stopPropagation(e);
-					return Forms.Utils.preventDefault(e);
+//					void(0);
+//					Forms.Utils.stopPropagation(e);
+//					return Forms.Utils.preventDefault(e);
 				}
 			};
 			Forms.Utils.addUniqueEvent(document, "keydown", keyUpFunction, true,undefined,true);

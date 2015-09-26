@@ -15,7 +15,7 @@
 	String options=request.getParameter("options");
 	JSONObject jsonObject=new JSONObject(options);
 	out.print("<legend>"+type+"  options</legend>");
-	KParameterizedInstruction condition=new KParameterizedInstruction("`", "chartOption", "charttype NOT like '%!"+type+"%' AND charttype like '%"+type+"%' OR `charttype`='' OR isNull(`charttype`)");
+	KParameterizedInstruction condition=new KParameterizedInstruction("`", "chartOption", "charttype like '%"+type+"%' OR `charttype`='' OR isNull(`charttype`)");
 	KListObject<KChartOption> chartOptions=Ko.getDao(KChartOption.class).readAll(condition);
 	for(KChartOption chartOption:chartOptions){
 		String chartType=chartOption.getType();

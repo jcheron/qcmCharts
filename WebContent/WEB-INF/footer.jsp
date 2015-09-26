@@ -12,7 +12,7 @@ if(KDebugClient.isActive()){
 %>
 <%=KoHttp.kajaxIncludes(request)%>
 <script type="text/javascript">
-google.load('visualization', '1', {packages:['corechart','table']});
+google.load('visualization', '1', {packages:['corechart','table','map']});
 </script>
 </body>
 </html>

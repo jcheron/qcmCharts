@@ -26,7 +26,7 @@ if((request.getServerName()).contains("kobject"))
 	<div class="bs-docs-header">
 		<div class="container">
 			<div class="header">
-				<h1>Questionnaire BTS SIO</h1>
+				<h1 id="title">Questionnaire BTS SIO</h1>
 				<p>Informations relatives à l'utilisation de l'informatique</p>
 			</div>
 		</div>

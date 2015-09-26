@@ -195,7 +195,7 @@
         <request requestURL="charts{#.*#}.do">
             <js triggerEvent="click" triggerSelector=".update">
                 <include targetId="chartDetails" targetParams="id={js:$vId(this.id)}" targetURL="mkChart.do">
-                	<showHide targetSelector="#chartList" visible="0"/>
+                	<showHide targetSelector="#chartList, .alert" visible="0"/>
                 	<showHide targetSelector="#chartDetails" visible="1"/>
                 </include>
             </js>
@@ -215,7 +215,7 @@
             </js>
             <js triggerEvent="click" triggerSelector=".add">
                 <include targetId="chartDetails" targetURL="mkChart.do">
-	                <showHide targetSelector="#chartList" visible="0"/>
+	                <showHide targetSelector="#chartList, .alert" visible="0"/>
 	                <showHide targetSelector="#chartDetails" visible="1"/>
                 </include>
             </js>
@@ -233,7 +233,7 @@
             	<showHide targetSelector="#chartDetails" visible="!(!$('ckPreview').checked || $$('h-KChart')=='')"/>
             </js>
             <js triggerSelector="#btAll" triggerEvent="click">
-				<showHide targetSelector="#chartList" visible="0"/>
+				<showHide targetSelector="#chartList, .alert" visible="0"/>
 				<showHide targetSelector="#chartDetails" visible="1"/>
             	<include targetURL="allCharts.do" targetParams="all=0" targetId="chartDetails" targetFunction="function(){if(typeof drawChart == 'function') drawChart();}"/>
             </js>
@@ -247,6 +247,11 @@
                 	<include targetURL="chartsRefresh.do" targetId="_ajxContent" targetParams="selectedItem={js:$vId(target.id)}"/>
             	</include>
             </js>
+        </request>
+        <request requestURL="charts.do">
+        	<js triggerSelector="body" triggerEvent="load">
+        		<message targetId="title" title="'Exploitation'" transition="opacityShow">'Exploitation QCM'</message>
+        	</js>
         </request>
         <request requestURL="allCharts.do">
         	<js triggerSelector="body" triggerEvent="load">
