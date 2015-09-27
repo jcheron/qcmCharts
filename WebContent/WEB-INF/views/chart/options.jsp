@@ -38,7 +38,7 @@ while(names.hasMoreElements()){
 			if(KString.isBoolean(parameter))
 				values.put(name,KString.isBooleanTrue(parameter));
 			else if(KString.isNumeric(parameter)){
-				Number n=NumberFormat.getNumberInstance(Locale.FRENCH).parse(parameter);
+				Number n=NumberFormat.getNumberInstance(Locale.ENGLISH).parse(parameter);
 				values.put(name,n);
 			}else
 				values.put(name, parameter);
