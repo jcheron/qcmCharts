@@ -1,6 +1,7 @@
 <div class="panel">
 <div class="panel-body" id="content">
 {_form}
+{idGroupe}
 {nom}{prenom}{email}{dNaiss}
 <div id="progressBar">
 	<div class="progress">

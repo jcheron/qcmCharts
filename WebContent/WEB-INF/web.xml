@@ -1,12 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>qcmCharts</display-name>
-  <welcome-file-list>
-    <welcome-file>q2.do</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>qcmCharts</display-name>
+	<welcome-file-list>
+		<welcome-file>q2.do</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<filter-class>net.ko.filters.HttpCacheFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=2592000, public</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.kjs</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.png</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.kcss</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.jpg</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HTTPCacheForStaticR</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
 </web-app>

@@ -18,12 +18,15 @@ public class KQuestionnaire extends KObject {
 	private String email;
 	private String nom;
 	private String prenom;
+	private int idGroupe = 3;
+	private KGroupe groupe;
 	private KListObject<KReponsemultiple> reponsemultiples;
 	private KListObject<KReponseunique> reponseuniques;
 
 	public KQuestionnaire() {
 		super();
 		dNaiss = Date.valueOf("1996-1-1");
+		belongsTo(KGroupe.class);
 		// hasMany(KReponseunique.class);hasMany(KReponsemultiple.class);
 	}
 

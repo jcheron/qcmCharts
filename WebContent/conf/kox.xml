@@ -9,11 +9,18 @@
         <member max="100" name="libc" required="1" type="string"/>
         <member max="11" name="ordre" required="1" type="int"/>
         <member max="30" name="type" required="1" type="string" list="{Ouverte:Ouverte,Multiple:Multiple,MultipleUnique:Multiple unique,MultipleExt:Multiple avec Ext,MultipleUniqueExt:Multiple unique avec Ext}"/>
-        <member name="complement" type="string" control="textarea"/>
+        <member name="complement" type="string" control="textarea" />
+    </class>
+    <class name="KGroupe" caption="Groupe">
+    	<member name="libelle" type="string"/>
+    </class>
+    <class name="KRapport">
+    	<member name="titre" type="string"/>
+    	<member name="viewSql" type="string" control="textarea"/>
     </class>
     <class name="KChart" display="net.display.Charts" caption="Graphique">
     	<member name="type" caption="Type" type="string" control="radiodatalist" list="[net.models.KCharttype]" required="true"/>
-    	<member name="viewName" control="radiodatalist" caption="Vue associée" required="true"/>
+    	<member name="viewName" control="datalist" caption="Vue associée" required="true"/>
     	<member name="options" type="string" control="textarea" caption="Options du graphique"/>
     	<member name="description" type="string" control="textarea" caption="Description"/>
     	<member name="ordre" type="integer" control="number" caption="Ordre"/>
@@ -34,6 +41,7 @@
         <member max="255" name="email" required="1" type="mail" caption="Adresse email"/>
         <member max="30" name="nom" required="1" type="string" caption="Nom"/>
         <member max="30" name="prenom" required="1" type="string" caption="Prénom"/>
+        <member name="idGroupe" type="int" control="readonlylist"/>
     </class>
     <class name="KReponse">
         <member max="11" name="idQuestion" required="1" type="int"/>

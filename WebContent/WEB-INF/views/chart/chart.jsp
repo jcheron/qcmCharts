@@ -1,3 +1,7 @@
+<%@page import="net.models.KRapport"%>
+<%@page import="net.ko.types.HtmlControlType"%>
+<%@page import="net.ko.http.views.KHtmlFieldControl"%>
+<%@page import="net.ko.kobject.KListObject"%>
 <%@page import="net.ko.mapping.KAjaxInclude"%>
 <%@page import="net.ko.ksql.KParameterizedInstruction"%>
 <%@page import="net.models.KChart"%>
@@ -48,7 +52,12 @@ if(KRequest.isPost(request)){
 			description=kchart.getDescription();
 			divId="chart-"+all;
 			if(all==0){
-				out.print("<div class='boxButtons'><a class='btn all' id='btCloseAll' title='Fermer le rapport'><span class='glyphicon glyphicon-off' aria-hidden='true'></span> Fermer le rapport</a>");
+				String idRapport=KRequest.GETPOST("idRapport", request,"");
+				KListObject<KRapport> rapports=Ko.getDao(KRapport.class).readAll();
+				KHtmlFieldControl ctrlRapport=new KHtmlFieldControl("", idRapport, "cmbRapport", "cmbRapport", HtmlControlType.khcCmb);
+				ctrlRapport.setPlaceHolder("Sélectionnez le rapport...");
+				ctrlRapport.setListObject(rapports);
+				out.print("<div class='boxButtons'>"+ctrlRapport+"<a class='btn all' id='btCloseAll' title='Fermer le rapport'><span class='glyphicon glyphicon-off' aria-hidden='true'></span> Fermer le rapport</a>");
 				out.print("<a class='btn all' id='btPrintAll' title='Imprimer le rapport'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> Imprimer</a></div>");
 				out.print("<input type='hidden' id='chartValue' name='chartValue' value='0'>");
 			}

@@ -6,7 +6,7 @@ import net.ko.persistence.annotation.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "chartOption")
+@Table(name = "chartoption")
 public class KChartOption extends KObject {
 	private String name;
 	private String type;

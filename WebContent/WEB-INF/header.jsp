@@ -7,11 +7,7 @@ if((request.getServerName()).contains("kobject"))
 <html>
 <head>
 <script src="<%=path%>/js/forms.js"></script>
-<script src="<%=path%>/js/userJS.js"></script>
-<script src="<%=path%>/js/sizzle.js"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-<script type="text/javascript" src="messages.kjs"></script>
 <link rel="stylesheet" href="<%=path%>/css/lightbox.kcss">
 <link rel="stylesheet" href="<%=path%>/css/main.kcss">
 <link rel="stylesheet" href="<%=path%>/css/list.kcss">
