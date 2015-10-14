@@ -18,7 +18,7 @@ public class KQuestionnaire extends KObject {
 	private String email;
 	private String nom;
 	private String prenom;
-	private int idGroupe = 3;
+	private int idGroupe = 1;
 	private KGroupe groupe;
 	private KListObject<KReponsemultiple> reponsemultiples;
 	private KListObject<KReponseunique> reponseuniques;
@@ -141,6 +141,14 @@ public class KQuestionnaire extends KObject {
 	@Override
 	public String toString() {
 		return " [nom] = " + nom + " [prenom] = " + prenom + " [email] = " + email + " [dNaiss] = " + dNaiss;
+	}
+
+	public int getIdGroupe() {
+		return idGroupe;
+	}
+
+	public void setIdGroupe(int idGroupe) {
+		this.idGroupe = idGroupe;
 	}
 
 }

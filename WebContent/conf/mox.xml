@@ -135,7 +135,7 @@
             </js>
             <js triggerEvent="click" triggerSelector="#btClose">
                 <messageDialog condition="document.updated" modal="false" title="Fermeture du graphique" transition="inflate">
-                    <button caption="Enregistrer et Fermer" id="btCloseAndSave">
+                    <button caption="Enregistrer et Fermer" id="btCloseAndSave" glyphIcon="floppy-disk">
                         <submitForm condition="vfrmKChart.validate()==true" formName="frmKChart" kobjectShortClassName="KChart" method="POST" targetId="_ajx" validation="true" virtualURL="updateChart.do">
                             <include targetId="_ajxContent" targetURL="chartsRefresh.do">
                                 <showHide targetSelector="#chartDetails" visible="0"/>
@@ -145,13 +145,13 @@
                         </submitForm>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Fermer" id="btCloseNotSave">
+                    <button caption="Fermer" id="btCloseNotSave" glyphIcon="off">
                         <showHide targetSelector="#chartDetails" visible="0"/>
                         <showHide targetSelector="#chartList" visible="1"/>
                         <function script="document.updated=false;"/>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Annuler" id="btCancel">
+                    <button caption="Annuler" id="btCancel" glyphIcon="remove">
                         <function script="return true;"/>
                     </button>
                     <message>'&lt;p&gt;Souhaitez-vous enregistrer vos modifications&lt;br&gt; avant de poursuivre ?&lt;/p&gt;'</message>
@@ -202,13 +202,13 @@
             </js>
             <js triggerEvent="click" triggerSelector=".delete">
                 <messageDialog modal="false" title="Suppression du graphique" transition="inflate">
-                    <button caption="Supprimer" id="btDelete">
+                    <button caption="Supprimer" id="btDelete" glyphIcon="ok">
                         <deleteOne keyValues="{js:$vId(target.id)}" kobjectShortClassName="KChart" method="POST" targetId="_ajx" virtualURL="deleteChart.do">
                             <include targetId="_ajxContent" targetURL="chartsRefresh.do"/>
                         </deleteOne>
                         <function script="return true;"/>
                     </button>
-                    <button caption="Annuler" id="btCancel">
+                    <button caption="Annuler" id="btCancel" glyphIcon="remove">
                         <function script="return true;"/>
                     </button>
                     <message>'&lt;p&gt;Le graphique sera définitivement supprimé.&lt;br&gt;Souhaîtez vous poursuivre ?&lt;/p&gt;'</message>
